@@ -3,8 +3,10 @@ system "clear"
 
 puts "Welcome to the products store!" 
 
-response = Unirest.get("http://localhost:3000/products")
-products = response.body["products"]
+response = Unirest.get("http://localhost:3000/v1/products")
+products = response.body
+
+# puts JSON.pretty_generate(products)   method to print out in JSON format 
 
 index = 0 
 puts "The items are: "
