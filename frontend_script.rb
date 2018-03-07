@@ -1,4 +1,6 @@
 require "Unirest"
+require "tty-table"
+
 system "clear"
 
 puts "Welcome to the products store!" 
@@ -15,6 +17,10 @@ products.length.times do
   index = index + 1 
 end 
 
+table_header = ["Id", "Name", "Price"]
+table_body = products.map { |product| [product["id"], product["name"], product["price"]]}
+table = TTY::Table.new table_header, table_body
+puts table.render(:ascii)
 
 
 
