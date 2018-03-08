@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     get "/second_product" => "products#second_product"
 
     get "/any_product" => "products#any_product"
+    get "/any_product/:id" => "products#any_product"
   end 
 end
