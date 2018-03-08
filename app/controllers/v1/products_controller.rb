@@ -14,4 +14,10 @@ class V1::ProductsController < ApplicationController
     render json: {product_2: product}
   end 
 
+  def any_product 
+    id = params["id"]
+    product = Product.find_by(id: id) 
+    render json: {product: product} 
+  end 
+
 end
