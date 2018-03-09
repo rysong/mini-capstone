@@ -25,9 +25,17 @@ elsif input_option == "2"
 elsif input_option == "3"
   
   params = {}
-  puts "enter a product name"
-  product_name = gets.chomp
-  params["name"] = product_name 
+  puts "Enter a product name:"
+  params["name"] = gets.chomp
+
+  puts "Enter a product price:"
+  params["price"]= gets.chomp 
+  
+  puts "Enter a product image url:"
+  params["image_url"] = gets.chomp 
+  
+  puts "Enter a description:"
+  params["description"] = gets.chomp 
 
   # OR 
   # params = {
