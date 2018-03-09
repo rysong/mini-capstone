@@ -23,12 +23,19 @@ elsif input_option == "2"
   puts JSON.pretty_generate(product) 
 
 elsif input_option == "3"
-  params = {
-    "name" => "Google Pixel", 
-    "price" => 800,
-    "image_url" => "https://goo.gl/images/GCUwZM", 
-    "description" => "Google phone"
-      }
+  
+  params = {}
+  puts "enter a product name"
+  product_name = gets.chomp
+  params["name"] = product_name 
+
+  # OR 
+  # params = {
+  #   "name" => "Google Pixel", 
+  #   "price" => 800,
+  #   "image_url" => "https://goo.gl/images/GCUwZM", 
+  #   "description" => "Google phone"
+  #     }
 
   response = Unirest.post("http://localhost:3000/v1/products", parameters: params) 
   product = response.body
