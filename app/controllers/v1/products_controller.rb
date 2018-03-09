@@ -1,5 +1,5 @@
 class V1::ProductsController < ApplicationController
-  def show_products
+  def index 
     products = Product.all 
     render json: products.as_json #as_json is assumed if not typed in
   end 
