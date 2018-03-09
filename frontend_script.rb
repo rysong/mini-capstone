@@ -7,6 +7,7 @@ puts "Welcome to the products store! Choose an option:"
 puts "[1] See all products."
 puts "[2] See one product."
 puts "[3] Create new product." 
+puts "[4] Update a product."
 
 input_option = gets.chomp 
 
@@ -49,6 +50,23 @@ elsif input_option == "3"
   product = response.body
   puts JSON.pretty_generate(product) 
 
+elsif input_option == "4"
+  print "Enter a product id:"
+  product_id = gets.chomp 
+
+  params = {}
+  print "name:"
+  params["name"] = gets.chomp
+  print "price:"
+  params["price"]= gets.chomp 
+  print "image url:"
+  params["image_url"] = gets.chomp 
+  print "description:"
+  params["description"] = gets.chomp 
+
+  response = Unirest.patch("http://localhost:3000/v1/products/#{product_id}", parameters: params)
+  product = response.body 
+  puts JSON.pretty_generate(product) 
 end 
 
 # table_header = ["Id", "Name", "Price"]
