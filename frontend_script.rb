@@ -64,6 +64,8 @@ elsif input_option == "4"
   print "description:"
   params["description"] = gets.chomp 
 
+  params.delete_if { |_key, value| value.empty? }
+  
   response = Unirest.patch("http://localhost:3000/v1/products/#{product_id}", parameters: params)
   product = response.body 
   puts JSON.pretty_generate(product) 
