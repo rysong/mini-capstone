@@ -54,14 +54,17 @@ elsif input_option == "4"
   print "Enter a product id:"
   product_id = gets.chomp 
 
+  response = Unirest.get("http://localhost:3000/v1/products/#{product_id}")
+  product = response.body 
+
   params = {}
-  print "name:"
+  print "name (#{product["name"]}): "
   params["name"] = gets.chomp
-  print "price:"
+  print "price (#{product["price"]}): "
   params["price"]= gets.chomp 
-  print "image url:"
+  print "image url (#{product["image_url"]}): "
   params["image_url"] = gets.chomp 
-  print "description:"
+  print "description (#{product["description"]}): "
   params["description"] = gets.chomp 
 
   params.delete_if { |_key, value| value.empty? }
