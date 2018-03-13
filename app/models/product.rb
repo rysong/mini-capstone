@@ -19,6 +19,7 @@ class Product < ApplicationRecord
       price: price, 
       image_url: image_url, 
       description: description,
+      in_stock: in_stock, 
       is_discounted: is_discounted,
       tax: tax,
       total: total 
