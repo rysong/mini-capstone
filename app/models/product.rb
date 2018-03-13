@@ -1,19 +1,15 @@
 class Product < ApplicationRecord
   
   def is_discounted 
-    if price < 2
-      is_discounted = true 
-    else 
-      is_discounted = false 
-    end 
+    price < 2 #returns true or false  
   end 
 
   def tax
-    tax = price * 0.09 
+    price * 0.09 
   end 
 
   def total 
-    total = price + tax 
+    price + tax 
   end 
 
   def as_json
