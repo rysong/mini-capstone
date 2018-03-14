@@ -37,8 +37,10 @@ elsif input_option == "3"
   params["image_url"] = gets.chomp 
   
   puts "Enter a description:"
-  params["description"] = gets.chomp 
+  params["description"] = gets.chomp
 
+  puts "Enter true if it's in stock or false if it's not:"
+  params["in_stock"] = gets.chomp 
   # OR 
   # params = {
   #   "name" => "Google Pixel", 
@@ -67,6 +69,8 @@ elsif input_option == "4"
   params["image_url"] = gets.chomp 
   print "description (#{product["description"]}): "
   params["description"] = gets.chomp 
+  print "in stock (#{product["in_stock"]}): "
+  params["in_stock"] = gets.chomp 
 
   params.delete_if { |_key, value| value.empty? }
   
