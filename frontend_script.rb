@@ -22,7 +22,6 @@ elsif input_option == "2"
   product_id = gets.chomp 
   response = Unirest.get("http://localhost:3000/v1/products/#{product_id}")
   product = response.body 
-  puts JSON.pretty_generate(product) 
 
 elsif input_option == "3"
   
@@ -51,7 +50,15 @@ elsif input_option == "3"
 
   response = Unirest.post("http://localhost:3000/v1/products", parameters: params) 
   product = response.body
-  puts JSON.pretty_generate(product) 
+
+  if product["errors"] 
+    puts "Oops, that didn't work: "
+    p product["errors"]
+  else 
+    puts "This is the new product: "
+    puts JSON.pretty_generate(product) 
+  end 
+  
 
 elsif input_option == "4"
   print "Enter a product id:"
@@ -76,7 +83,14 @@ elsif input_option == "4"
   
   response = Unirest.patch("http://localhost:3000/v1/products/#{product_id}", parameters: params)
   product = response.body 
-  puts JSON.pretty_generate(product) 
+  
+  if product["errors"] 
+    puts "Oops, that didn't work: "
+    p product["errors"]
+  else 
+    puts "This is the new product: "
+    puts JSON.pretty_generate(product) 
+  end 
 
 elsif input_option == "5"
   print "Enter a product id:"
