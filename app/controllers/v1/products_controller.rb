@@ -20,9 +20,11 @@ class V1::ProductsController < ApplicationController
       in_stock: params["in_stock"]
     })
 
-    product.save 
-    render json: product.as_json 
-
+    if product.save #happy or sad path logic 
+      render json: product.as_json 
+    else 
+      render json: {errors: product.errors.full_messages}, status: :unprocessable_entity
+    end 
   end 
  
   def update 
@@ -35,8 +37,11 @@ class V1::ProductsController < ApplicationController
     product.description = params["description"]||product.description 
     product.in_stock = params["in_stock"]||product.in_stock 
 
-    product.save 
-    render json: product.as_json 
+    if product.save 
+      render json: product.as_json 
+    else 
+      render json: {errors: product.errors.full_messages}, status: :unprocessable_entity 
+    end 
   end 
 
   def destroy 
