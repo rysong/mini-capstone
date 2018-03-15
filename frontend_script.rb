@@ -4,8 +4,9 @@ require "tty-table"
 system "clear"
 
 puts "Welcome to the products store! Choose an option:" 
-puts "[1] See all products."
-puts "  [1.1] Search for a product by name." 
+puts "[1] See all products ordered by id."
+puts "  [1.1] See all products ordered by price."
+puts "  [1.2] Search for a product by name." 
 puts "[2] See one product."
 puts "[3] Create new product." 
 puts "[4] Update a product."
@@ -14,11 +15,16 @@ puts "[5] Delete a product"
 input_option = gets.chomp 
 
 if input_option == "1" 
-  response = Unirest.get("http://localhost:3000/v1/products")
+  response = Unirest.get("http://localhost:3000/v1/products?input_sort_by=id")
   products = response.body 
   puts JSON.pretty_generate(products)
 
 elsif input_option == "1.1" 
+  response = Unirest.get("http://localhost:3000/v1/products?input_sort_by=price")
+  products = response.body 
+  puts JSON.pretty_generate(products)
+
+elsif input_option == "1.2" 
   print "Enter a product name to search: "
   input = gets.chomp 
   response = Unirest.get("http://localhost:3000/v1/products?input_search_terms=#{input}")

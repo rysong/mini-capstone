@@ -1,10 +1,17 @@
 class V1::ProductsController < ApplicationController
   
   def index 
-    products = Product.all.order(:id => :asc)
+
+    sort_by = params["input_sort_by"]
+    if sort_by == "id"
+      products = Product.all.order(:id => :asc)
+    elsif sort_by == "price"
+      products = Product.all.order(:price => :desc)
+    end 
 
     search_terms = params["input_search_terms"]
     if search_terms
+      products = Product.all 
       products = products.where("name ILIKE ?", "%#{search_terms}%") #ILIKE ignores case
     end 
 
