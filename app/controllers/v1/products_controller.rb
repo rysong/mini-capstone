@@ -2,6 +2,8 @@ class V1::ProductsController < ApplicationController
   
   def index 
 
+    products = Product.all 
+    
     sort_by = params["input_sort_by"]
     if sort_by == "id"
       products = Product.all.order(:id => :asc)
