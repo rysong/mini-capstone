@@ -18,6 +18,10 @@ class Product < ApplicationRecord
     price + tax 
   end 
 
+  def supplier
+    Supplier.find_by(id: supplier_id)
+  end 
+
   def as_json
     {
       id: id, 
@@ -28,7 +32,8 @@ class Product < ApplicationRecord
       in_stock: in_stock, 
       is_discounted: is_discounted,
       tax: tax,
-      total: total 
+      total: total, 
+      supplier: supplier.as_json 
     }
   end 
 
