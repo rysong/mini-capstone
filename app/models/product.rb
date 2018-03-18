@@ -22,6 +22,10 @@ class Product < ApplicationRecord
     Supplier.find_by(id: supplier_id)
   end 
 
+  def images
+    Image.where(product_id: id)
+  end 
+
   def as_json
     {
       id: id, 
@@ -32,6 +36,7 @@ class Product < ApplicationRecord
       is_discounted: is_discounted,
       tax: tax,
       total: total, 
+      images: images, 
       supplier: supplier.as_json 
     }
   end 
