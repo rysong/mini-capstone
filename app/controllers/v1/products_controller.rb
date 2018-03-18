@@ -29,8 +29,7 @@ class V1::ProductsController < ApplicationController
   def create 
     product = Product.new({
       name: params["name"],  
-      price: params["price"],  
-      image_url: params["image_url"], 
+      price: params["price"],   
       description: params["description"],
       in_stock: params["in_stock"]
     })
@@ -47,8 +46,7 @@ class V1::ProductsController < ApplicationController
     product = Product.find_by(id: product_id)
 
     product.name = params["name"]||product.name 
-    product.price = params["price"]||product.price 
-    product.image_url = params["image_url"]||product.image_url  
+    product.price = params["price"]||product.price  
     product.description = params["description"]||product.description 
     product.in_stock = params["in_stock"]||product.in_stock 
 

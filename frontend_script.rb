@@ -45,10 +45,7 @@ elsif input_option == "3"
 
   puts "Enter a product price:"
   params["price"]= gets.chomp 
-  
-  puts "Enter a product image url:"
-  params["image_url"] = gets.chomp 
-  
+    
   puts "Enter a description:"
   params["description"] = gets.chomp
 
@@ -86,8 +83,6 @@ elsif input_option == "4"
   params["name"] = gets.chomp
   print "price (#{product["price"]}): "
   params["price"]= gets.chomp 
-  print "image url (#{product["image_url"]}): "
-  params["image_url"] = gets.chomp 
   print "description (#{product["description"]}): "
   params["description"] = gets.chomp 
   print "in stock (#{product["in_stock"]}): "
@@ -102,7 +97,7 @@ elsif input_option == "4"
     puts "Oops, that didn't work: "
     p product["errors"]
   else 
-    puts "This is the new product: "
+    puts "This is the updated product: "
     puts JSON.pretty_generate(product) 
   end 
 
