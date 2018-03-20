@@ -1,8 +1,24 @@
 require "Unirest"
 require "tty-table"
 
+response = Unirest.post(
+  "http://localhost:3000/user_token",
+  parameters: {
+    auth: {
+      email: "richard@email.com",
+      password: "password" 
+    }
+  }
+)
+
+# Save the JSON web token from the response
+jwt = response.body["jwt"]
+# Include the jwt in the headers of any future web requests
+Unirest.default_header("Authorization", "Bearer #{jwt}")
+
 system "clear"
 
+puts "Your jwt is #{jwt}"
 puts "Welcome to the products store! Choose an option:" 
 puts "[1] See all products ordered by id."
 puts "  [1.1] See all products ordered by price."
