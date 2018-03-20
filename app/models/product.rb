@@ -18,13 +18,15 @@ class Product < ApplicationRecord
     price + tax 
   end 
 
-  def supplier
-    Supplier.find_by(id: supplier_id)
-  end 
+  belongs_to :supplier #shortcut for lines 22-24 
+  # def supplier
+  #   Supplier.find_by(id: supplier_id)
+  # end 
 
-  def images
-    Image.where(product_id: id)
-  end 
+  has_many :images 
+  # def images
+  #   Image.where(product_id: id)
+  # end 
 
   def as_json
     {
@@ -36,7 +38,7 @@ class Product < ApplicationRecord
       is_discounted: is_discounted,
       tax: tax,
       total: total, 
-      images: images, 
+      images: images.map {|image| image.url}, 
       supplier: supplier.as_json 
     }
   end 

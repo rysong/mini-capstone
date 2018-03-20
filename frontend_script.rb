@@ -11,6 +11,7 @@ puts "[2] See one product."
 puts "[3] Create new product." 
 puts "[4] Update a product."
 puts "[5] Delete a product"
+puts "[signup] Signup (create a user)"
 
 input_option = gets.chomp 
 
@@ -108,6 +109,22 @@ elsif input_option == "5"
   response = Unirest.delete("http://localhost:3000/v1/products/#{product_id}")
   body = response.body
   puts JSON.pretty_generate(body)
+
+elsif input_option == "signup"
+
+  params = {}
+  puts "Enter a name:"
+  params[:name] = gets.chomp
+  puts "Enter an email:"
+  params[:email] = gets.chomp
+  puts "Enter a password:"
+  params[:password] = gets.chomp
+  puts "Confirm the password:"
+  params[:password_confirmation] = gets.chomp
+
+  response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
+  p response.body 
+
 end 
 
 # table_header = ["Id", "Name", "Price"]
