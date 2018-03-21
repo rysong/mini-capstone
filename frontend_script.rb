@@ -50,7 +50,7 @@ puts "[3] Create new product."
 puts "[4] Update a product."
 puts "[5] Delete a product."
 puts "[6] Create an order."
-puts "[7] See your orders"
+puts "[7] See your orders."
 puts "[signup] Signup (create a user)."
 
 
