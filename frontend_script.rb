@@ -1,25 +1,47 @@
 require "Unirest"
 require "tty-table"
 
-response = Unirest.post(
+system "clear"
+puts "Welcome to the products store! Choose an option:" 
+puts "[signup] Signup (create a user)"
+puts "[login] Login (create a JSON web token)"
+puts "[logout] Logout (delete the JSON web token)"
+
+input_option = gets.chomp 
+
+if input_option == "signup"
+  params = {
+  name: "Richard",
+  email: "richard@email.com",
+  password: "password",
+  password_confirmation: "password"
+  } 
+  response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
+  p response.body
+
+elsif input_option == "login" 
+  response = Unirest.post(
   "http://localhost:3000/user_token",
   parameters: {
     auth: {
       email: "richard@email.com",
-      password: "password" 
+      password: "password"
     }
   }
-)
+  )
+  jwt = response.body["jwt"]
+  Unirest.default_header("Authorization", "Bearer #{jwt}")
 
-# Save the JSON web token from the response
-jwt = response.body["jwt"]
-# Include the jwt in the headers of any future web requests
-Unirest.default_header("Authorization", "Bearer #{jwt}")
+elsif input_option == "logout"
+  jwt = ""
+  Unirest.clear_default_headers()
+end 
+puts "Your jwt is #{jwt}"
+puts ""
+puts "Press enter to continue"
+gets.chomp 
 
 system "clear"
-
-puts "Your jwt is #{jwt}"
-puts "Welcome to the products store! Choose an option:" 
 puts "[1] See all products ordered by id."
 puts "  [1.1] See all products ordered by price."
 puts "  [1.2] Search for a product by name." 
@@ -28,6 +50,7 @@ puts "[3] Create new product."
 puts "[4] Update a product."
 puts "[5] Delete a product."
 puts "[6] Create an order."
+puts "[7] See your orders"
 puts "[signup] Signup (create a user)."
 
 
@@ -145,6 +168,12 @@ elsif input_option == "6"
     puts "This is the order: "
     puts JSON.pretty_generate(order) 
   end 
+
+elsif input_option == "7"
+  puts "Here are your order(s)"
+  response = Unirest.get("http://localhost:3000/v1/orders")
+  orders = response.body 
+  puts JSON.pretty_generate(orders)
 
 elsif input_option == "signup"
 

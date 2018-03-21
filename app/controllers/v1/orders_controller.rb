@@ -1,5 +1,12 @@
 class V1::OrdersController < ApplicationController
   
+  def index 
+  
+    orders = current_user.orders 
+    render json: orders.as_json
+    
+  end 
+
   def create 
 
     product_id = params[:product_id]
