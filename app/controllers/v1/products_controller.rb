@@ -1,4 +1,5 @@
 class V1::ProductsController < ApplicationController
+  before_action :authenticate_admin, except: [:index, :show]
   
   def index 
 
@@ -31,7 +32,8 @@ class V1::ProductsController < ApplicationController
       name: params["name"],  
       price: params["price"],   
       description: params["description"],
-      in_stock: params["in_stock"]
+      in_stock: params["in_stock"],
+      supplier_id: 1 
     })
 
     if product.save #happy or sad path logic 
