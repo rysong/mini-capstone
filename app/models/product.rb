@@ -7,6 +7,16 @@ class Product < ApplicationRecord
   validates :description, length: { in: 10..500 } 
 
   has_many :orders 
+  belongs_to :supplier #shortcut for lines 22-24 
+  # def supplier
+  #   Supplier.find_by(id: supplier_id)
+  # end 
+  has_many :images 
+  # def images
+  #   Image.where(product_id: id)
+  # end 
+  has_many :categories 
+
 
   def is_discounted 
     price < 2 #returns true or false  
@@ -19,16 +29,6 @@ class Product < ApplicationRecord
   def total 
     price + tax 
   end 
-
-  belongs_to :supplier #shortcut for lines 22-24 
-  # def supplier
-  #   Supplier.find_by(id: supplier_id)
-  # end 
-
-  has_many :images 
-  # def images
-  #   Image.where(product_id: id)
-  # end 
 
   def as_json
     {
