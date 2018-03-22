@@ -15,7 +15,8 @@ class Product < ApplicationRecord
   # def images
   #   Image.where(product_id: id)
   # end 
-  has_many :categories 
+  has_many :category_products
+  has_many :categories, through: :category_products
 
 
   def is_discounted 
