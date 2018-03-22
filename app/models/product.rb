@@ -42,7 +42,8 @@ class Product < ApplicationRecord
       tax: tax,
       total: total, 
       images: images.map {|image| image.url}, 
-      supplier: supplier.as_json 
+      supplier: supplier.as_json,
+      categories: categories.map {|category| category.name}
     }
   end 
 
