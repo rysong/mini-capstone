@@ -44,7 +44,7 @@ gets.chomp
 system "clear"
 puts "[1] See all products ordered by id."
 puts "  [1.1] See all products ordered by price."
-puts "  [1.2] Search for a product by name." 
+puts "  [1.2] Search for a product by name."
 puts "[2] See one product."
 puts "[3] Create new product." 
 puts "[4] Update a product."
