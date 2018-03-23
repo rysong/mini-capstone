@@ -20,8 +20,6 @@ class V1::OrdersController < ApplicationController
 
     order = Order.new(
       user_id: current_user.id, 
-      product_id: product_id,
-      quantity: quantity,
       subtotal: subtotal,
       tax: tax,
       total: total 
