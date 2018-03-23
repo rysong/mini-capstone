@@ -50,7 +50,7 @@ puts "[3] Create new product."
 puts "[4] Update a product."
 puts "[5] Delete a product."
 puts "[6] Add items to cart." 
-puts "[7] See your orders."
+puts "[7] See items in your cart."
 puts "[signup] Signup (create a user)."
 
 
@@ -170,10 +170,10 @@ elsif input_option == "6"
   end 
 
 elsif input_option == "7"
-  puts "Here are your order(s)"
-  response = Unirest.get("http://localhost:3000/v1/orders")
-  orders = response.body 
-  puts JSON.pretty_generate(orders)
+  puts "This is in your cart:"
+  response = Unirest.get("http://localhost:3000/v1/carted_products")
+  carted_products = response.body 
+  puts JSON.pretty_generate(carted_products)
 
 elsif input_option == "signup"
 
