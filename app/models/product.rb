@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   validates :description, presence: true
   validates :description, length: { in: 10..500 } 
 
+  has_many :carted_products
   has_many :orders 
   belongs_to :supplier #shortcut for lines 22-24 
   # def supplier
