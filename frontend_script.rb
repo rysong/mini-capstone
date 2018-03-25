@@ -52,6 +52,7 @@ puts "[5] Delete a product."
 puts "[6] Add items to cart." 
 puts "[7] See items in your cart."
 puts "[8] Order the items in your cart"
+puts "[9] Remove an item from your cart"
 puts "[signup] Signup (create a user)."
 
 
@@ -189,6 +190,14 @@ elsif input_option == "8"
     puts "This is your order: "
     puts JSON.pretty_generate(order) 
   end 
+
+elsif input_option == "9"
+
+  puts "Enter the carted product id of the carted product you want to remove."
+  carted_product_id = gets.chomp 
+  response = Unirest.delete("http://localhost:3000/v1/carted_products/#{carted_product_id}")
+  body = response.body
+  puts JSON.pretty_generate(body)
 
 elsif input_option == "signup"
 
