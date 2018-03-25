@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   validates :description, length: { in: 10..500 } 
 
   has_many :carted_products
-  has_many :orders 
+  has_many :orders, through: :carted_products 
   belongs_to :supplier #shortcut for lines 22-24 
   # def supplier
   #   Supplier.find_by(id: supplier_id)

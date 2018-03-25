@@ -10,12 +10,11 @@ class V1::OrdersController < ApplicationController
 
   def create 
 
-    product_id = params[:product_id]
-    quantity = params[:quantity].to_i 
+    carted_products = current_user.carted_products.where(status: "carted") 
 
-    product = Product.find_by(id: product_id)
-    subtotal = product.price * quantity
-    tax = subtotal * 0.09 
+    subtotal = carted_products.map{|carted_product| carted_product.product.price * carted_product.quantity}.sum
+
+    tax = subtotal * 0.09
     total = subtotal + tax 
 
     order = Order.new(
@@ -24,11 +23,15 @@ class V1::OrdersController < ApplicationController
       tax: tax,
       total: total 
       )
+    order.save 
 
-    if order.save #happy or sad path logic 
-      render json: order.as_json 
-    else 
-      render json: {errors: order.errors.full_messages}, status: :unprocessable_entity
+    carted_products.each do |carted_product| 
+      carted_product.status = "purchased" 
+      carted_product.order_id = order.id 
+      carted_product.save
     end 
+    
+    render json: order.as_json 
+  
   end 
 end
