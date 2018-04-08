@@ -15,11 +15,9 @@ class V1::CartedProductsController < ApplicationController
       status: "carted" 
       )
 
-    if carted_product.save #happy or sad path logic 
-      render json: carted_product.as_json 
-    else 
-      render json: {errors: carted_product.errors.full_messages}, status: :unprocessable_entity
-    end 
+    carted_product.save
+    render json: carted_product.as_json 
+    
   end 
 
   def destroy 

@@ -5,3 +5,4 @@ class Order < ApplicationRecord
   has_many :products, through: :carted_products
   
 end
+

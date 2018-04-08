@@ -163,13 +163,9 @@ elsif input_option == "6"
   response = Unirest.post("http://localhost:3000/v1/carted_products", parameters: params)
   carted_product = response.body 
 
-  if carted_product["errors"] 
-    puts "Oops, that didn't work: "
-    p carted_product["errors"]
-  else 
-    puts "This is what you added to the cart: "
-    puts JSON.pretty_generate(carted_product) 
-  end 
+  puts "This is what you added to the cart: "
+  puts JSON.pretty_generate(carted_product) 
+
 
 elsif input_option == "7"
   puts "This is in your cart:"

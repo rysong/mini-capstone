@@ -1,0 +1,9 @@
+body {
+  font-family: Papyrus,fantasy;
+  background-image: url("sandpaper.png");
+}
+
+.navbar-brand{
+  font-family: 'Libre Barcode 128 Text', cursive;
+  font-size: 5em;
+}
