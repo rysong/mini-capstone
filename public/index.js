@@ -1,19 +1,32 @@
-/* global axios */
+/* global Vue, VueRouter, axios */
 
-var productTemplate = document.querySelector("#product-card");
-var productContainer = document.querySelector(".row");
+var HomePage = {
+  template: "#home-page",
+  data: function() {
+    return {
+      message: "Welcome to the Products Store",
+      products: []
+    };
+  },
+  created: function() {
+    axios.get("/v1/products").then(
+      function(response) {
+        this.products = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
 
-axios.get("http://localhost:3000/v1/products").then(function(response) {
-  var products = response.data;
-  console.log(products);
+var router = new VueRouter({
+  routes: [{ path: "/", component: HomePage }],
+  scrollBehavior: function(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
+});
 
-  products.forEach(function(product) {
-    var productClone = productTemplate.content.cloneNode(true);
-    productClone.querySelector(".card-title").innerText = product.name;
-    productClone.querySelector(".card-text").innerText = product.description;
-    productClone.querySelector(".list-group-item").innerText =
-      "price: $" + product.price;
-    productClone.querySelector(".card-img-top").src = product.images[0];
-    productContainer.appendChild(productClone);
-  });
+var app = new Vue({
+  el: "#vue-app",
+  router: router
 });
