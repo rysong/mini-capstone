@@ -78,6 +78,7 @@
     <h1>{{ message }}</h1>
 
     <h1> All Products </h1>
+    <a href="/#/sample">Go to a sample page</a>
     <div class="row">
     <div class="col-sm" v-for="product in products">
     <div class="card" style="width: 18rem;">
@@ -97,4 +98,14 @@
   </div>
   </div>
 
+</template>
+
+<template id="sample-page">
+  <div class="vue-component">
+    <div class="container">
+      <h1>{{ message }}</h1>
+      <a href="/#/">Go to home page</a>
+      <p>This is a sample page</p>
+    </div>
+  </div>
 </template>
