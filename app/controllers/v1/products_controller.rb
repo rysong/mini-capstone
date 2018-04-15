@@ -32,7 +32,7 @@ class V1::ProductsController < ApplicationController
       name: params["name"],  
       price: params["price"],   
       description: params["description"],
-      in_stock: params["in_stock"],
+      in_stock: true,
       supplier_id: 1 
     })
 
