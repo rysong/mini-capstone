@@ -5,7 +5,8 @@ var HomePage = {
   data: function() {
     return {
       message: "Welcome to the Products Store",
-      products: []
+      products: [],
+      currentProduct: {}
     };
   },
   created: function() {
@@ -15,7 +16,11 @@ var HomePage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    setCurrentProduct: function(product) {
+      this.currentProduct = product;
+    }
+  },
   computed: {}
 };
 
