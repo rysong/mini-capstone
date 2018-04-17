@@ -6,7 +6,8 @@ var HomePage = {
     return {
       message: "Welcome to the Products Store",
       products: [],
-      currentProduct: {}
+      currentProduct: {},
+      nameFilter: ""
     };
   },
   created: function() {
@@ -19,6 +20,11 @@ var HomePage = {
   methods: {
     setCurrentProduct: function(product) {
       this.currentProduct = product;
+    },
+    isValidProduct: function(product) {
+      var lowerCaseProduct = product.name.toLowerCase();
+      var lowerCaseNameFilter = this.nameFilter.toLowerCase();
+      return lowerCaseProduct.includes(lowerCaseNameFilter);
     }
   },
   computed: {}

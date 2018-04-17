@@ -88,11 +88,11 @@
   <div class="vue-component container">
 
     <h1>{{ message }}</h1>
-
+    <input type="text" v-model="nameFilter" placeholder="Search by product name">
     <h1> All Products </h1>
     <a href="/#/sample">Go to a sample page</a>
     <div class="row">
-      <div class="col-sm" v-for="product in products">
+      <div class="col-sm" v-for="product in products" v-if="isValidProduct(product)">
         <div class="card" style="width: 18rem;">
           <img class="card-img-top" v-bind:src="product.images[0]">
           <div class="card-body">
