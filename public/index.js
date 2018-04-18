@@ -7,7 +7,8 @@ var HomePage = {
       message: "Welcome to the Products Store",
       products: [],
       currentProduct: {},
-      nameFilter: ""
+      nameFilter: "",
+      sortAttribute: "name"
     };
   },
   created: function() {
@@ -27,7 +28,18 @@ var HomePage = {
       return lowerCaseProduct.includes(lowerCaseNameFilter);
     }
   },
-  computed: {}
+  computed: {
+    sortedProducts: function() {
+      return this.products.sort(
+        function(product1, product2) {
+          // return recipe1.chef.localeCompare(recipe2.chef);
+          var lowerAttribute1 = product1[this.sortAttribute].toLowerCase();
+          var lowerAttribute2 = product2[this.sortAttribute].toLowerCase();
+          return lowerAttribute1.localeCompare(lowerAttribute2);
+        }.bind(this)
+      );
+    }
+  }
 };
 
 var SamplePage = {
