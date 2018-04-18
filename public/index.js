@@ -8,7 +8,8 @@ var HomePage = {
       products: [],
       currentProduct: {},
       nameFilter: "",
-      sortAttribute: "name"
+      sortAttribute: "name",
+      sortAscending: true
     };
   },
   created: function() {
@@ -26,6 +27,10 @@ var HomePage = {
       var lowerCaseProduct = product.name.toLowerCase();
       var lowerCaseNameFilter = this.nameFilter.toLowerCase();
       return lowerCaseProduct.includes(lowerCaseNameFilter);
+    },
+    setSortAttribute: function(inputSortAttribute) {
+      this.sortAttribute = inputSortAttribute;
+      this.sortAscending = !this.sortAscending;
     }
   },
   computed: {
@@ -35,7 +40,11 @@ var HomePage = {
           // return recipe1.chef.localeCompare(recipe2.chef);
           var lowerAttribute1 = product1[this.sortAttribute].toLowerCase();
           var lowerAttribute2 = product2[this.sortAttribute].toLowerCase();
-          return lowerAttribute1.localeCompare(lowerAttribute2);
+          if (this.sortAscending) {
+            return lowerAttribute1.localeCompare(lowerAttribute2);
+          } else {
+            return lowerAttribute2.localeCompare(lowerAttribute1);
+          }
         }.bind(this)
       );
     }
